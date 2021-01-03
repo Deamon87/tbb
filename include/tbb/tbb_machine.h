@@ -276,7 +276,9 @@ template<> struct atomic_selector<8> {
     #include <sched.h>
 
     #define __TBB_Yield() sched_yield()
-
+#elif __EMSCRIPTEN__
+    #include "machine/linux_wasm32.h"
+    #include "machine/linux_common.h"
 #endif /* OS selection */
 
 #ifndef __TBB_64BIT_ATOMICS
@@ -310,6 +312,7 @@ template<> struct atomic_selector<8> {
     #define __TBB_FetchAndIncrementWacquire(P)  __TBB_FetchAndAddW(P,1)
     #define __TBB_FetchAndDecrementWrelease(P)  __TBB_FetchAndAddW(P,(-1))
 #endif /* !__TBB_USE_FENCED_ATOMICS */
+
 
 #if __TBB_WORDSIZE==4
     #define __TBB_CompareAndSwapW(P,V,C)    __TBB_machine_cmpswp4(P,V,C)

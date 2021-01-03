@@ -31,6 +31,8 @@
 #define RML_SERVER_NAME "libirml" DEBUG_SUFFIX ".so.1"
 #elif __FreeBSD__ || __NetBSD__ || __OpenBSD__ || __sun || _AIX
 #define RML_SERVER_NAME "libirml" DEBUG_SUFFIX ".so"
+#elif __EMSCRIPTEN__
+#define RML_SERVER_NAME "libirml" DEBUG_SUFFIX ".so"
 #else
 #error Unknown OS
 #endif
